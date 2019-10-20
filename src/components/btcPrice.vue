@@ -13,6 +13,7 @@ export default {
   data() {
     return {
       btcCurrPrice: "",
+      btcLastPrice: "",
       currency: ""
     };
   },
@@ -44,8 +45,11 @@ export default {
   },
   watch: {
     btcCurrPrice: function() {
-      // console.log(`Something changed ${this.btcCurrPrice} to ` + val);
-      this.priceChanged("btcPrice");
+      if (this.btcLastPrice) {
+        this.priceChanged("btcPrice");
+      } else {
+        this.btcLastPrice = this.btcCurrPrice;
+      }
     }
   }
 };
