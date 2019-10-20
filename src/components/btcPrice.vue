@@ -43,7 +43,7 @@ export default {
     this.getCurrentBtcPrice();
   },
   watch: {
-    btcCurrPrice: function(val) {
+    btcCurrPrice: function() {
       // console.log(`Something changed ${this.btcCurrPrice} to ` + val);
       this.priceChanged("btcPrice");
     }
