@@ -1,6 +1,10 @@
 <template>
   <div>
-    <h1 id="btcPrice">{{ btcCurrPrice }}</h1>
+    <div style="display: inline-flex">
+      <h1 id="btcPrice" style="margin-right: 10px">{{ btcCurrPrice }}</h1>
+      <img v-if="!isPriceUp" src="../assets/arrow-down.svg" height="20" width="20" />
+      <img v-else src="../assets/arrow-up.svg" height="20" width="20" />
+    </div>
     <h3>{{ currency }}</h3>
   </div>
 </template>
@@ -14,6 +18,7 @@ export default {
     return {
       btcCurrPrice: "",
       btcLastPrice: "",
+      isPriceUp: false,
       currency: ""
     };
   },
@@ -31,13 +36,6 @@ export default {
       } catch (e) {
         console.log(e);
       }
-    },
-    priceChanged(obj) {
-      var origin = document.getElementById(obj).style.color;
-      document.getElementById(obj).style.color = "red";
-      setTimeout(function() {
-        document.getElementById(obj).style.color = origin;
-      }, 500);
     }
   },
   created() {
@@ -46,7 +44,14 @@ export default {
   watch: {
     btcCurrPrice: function() {
       if (this.btcLastPrice) {
-        this.priceChanged("btcPrice");
+        if (this.btcLastPrice < this.btcCurrPrice) {
+          priceChanged("btcPrice", "#00ff00");
+          this.isPriceUp = true;
+        } else {
+          priceChanged("btcPrice", "red");
+          this.isPriceUp = false;
+        }
+        this.btcLastPrice = this.btcCurrPrice;
       } else {
         this.btcLastPrice = this.btcCurrPrice;
       }
