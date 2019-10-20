@@ -53,4 +53,12 @@ export default {
     }
   }
 };
+
+var priceChanged = (id, color) => {
+  var origin = document.getElementById(id).style.color;
+  document.getElementById(id).style.color = color;
+  setTimeout(function() {
+    document.getElementById(id).style.color = origin;
+  }, 500);
+};
 </script>
