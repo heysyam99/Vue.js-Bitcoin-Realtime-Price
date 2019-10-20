@@ -1,5 +1,6 @@
 <template>
   <div class="bit-center">
+    <currTime></currTime>
     <h1>REAL TIME BITCOIN PRICE</h1>
     <br />
     <svg
@@ -44,10 +45,12 @@
 
 <script>
 import btcPrice from "./btcPrice";
+import currTime from "./currentTime";
 
 export default {
   components: {
-    btcPrice
+    btcPrice,
+    currTime
   },
   name: "btc"
 };
@@ -62,7 +65,7 @@ export default {
 .bit-center {
   text-align: center;
   position: absolute;
-  top: 20%;
+  top: 15%;
   left: 0;
   width: 100%;
 }
